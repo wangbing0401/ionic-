@@ -128,12 +128,18 @@ app.controller('ScrollController', ['$scope', '$rootScope', function($scope, $ro
         $rootScope.hideTabs = false;
         window.history.back();
     }
-    $scope.scroll = false;
-    $scope.data = [1,1,1];
-    $scope.loadMoreData = function(){
-        $scope.data.push(1);
-        $scope.$broadcast('scroll.infiniteScrollComplete');
-    }
+    $scope.doRefresh = function() {
+
+        console.log('Refreshing!');
+        $timeout( function() {
+
+
+            //Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+
+        }, 1000);
+
+    };
 }]);
 app.controller('DetailTabController', ['$scope', function($scope){
     var socket = io('http://192.168.1.113:3000');

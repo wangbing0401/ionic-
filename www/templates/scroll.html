@@ -3,11 +3,7 @@
         <ion-nav-back-button ng-click="fanhui()"></ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-        <ion-infinite-scroll on-infinite="loadMoreData()" ng-if="!scroll" >
-
-        </ion-infinite-scroll>
-        <ion-list>
-            <ion-item ng-repeat="l in data">列表{{l}}</ion-item>
-        </ion-list>
+        <ion-refresher on-refresh="doRefresh()" pulling-text="Pull to refresh..." refreshing-text="Refreshing!" refreshing-icon="ion-loading-c">
+        </ion-refresher>
     </ion-content>
 </ion-view>
