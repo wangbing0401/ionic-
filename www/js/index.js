@@ -123,17 +123,18 @@ app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet',
         window.history.back();
     }
 }]);
-app.controller('ScrollController', ['$scope', '$rootScope', function($scope, $rootScope){
+app.controller('ScrollController', ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout){
     $scope.fanhui = function(){
         $rootScope.hideTabs = false;
         window.history.back();
     }
+    $scope.data = [1,2,3,4,5];
+    var length;
     $scope.doRefresh = function() {
-
-        console.log('Refreshing!');
+        length = $scope.data.length;
+        length++;
+        $scope.data.push(length);
         $timeout( function() {
-
-
             //Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
 
