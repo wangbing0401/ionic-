@@ -1,0 +1,13 @@
+<ion-view view-title="scroll">
+    <ion-nav-bar class="bar-positive" align-title="center">
+        <ion-nav-back-button ng-click="fanhui()"></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()" pulling-text="Pull to refresh..." refreshing-text="Refreshing!" refreshing-icon="ion-loading-c">
+        </ion-refresher>
+        <ion-list>
+            <ion-item ng-repeat="l in data">列表{{l}}</ion-item>
+        </ion-list>
+        <img src="file:///Users/tx-0020/Desktop/wallhaven-10265.jpg" />
+    </ion-content>
+</ion-view>

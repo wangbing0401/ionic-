@@ -28,6 +28,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', func
                 }
             }
         })
+        .state('tabs.scroll', {
+            url:"/scroll",
+            views:{
+                'home-tab':{
+                    templateUrl:"templates/scroll.html",
+                    controller:"ScrollController"
+                }
+            }
+        })
         .state('tabs.detail', {
             url: "/detail",
             views: {
@@ -55,6 +64,10 @@ app.controller('HomeTabController', ['$scope', '$rootScope', '$state', function(
     $scope.push = function(){
         $rootScope.hideTabs = true;
         $state.go('tabs.push');
+    }
+    $scope.push_scroll = function(){
+        $rootScope.hideTabs = true;
+        $state.go('tabs.scroll');
     }
 }]);
 app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner){
@@ -109,6 +122,25 @@ app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet',
         $rootScope.hideTabs = false;
         window.history.back();
     }
+}]);
+app.controller('ScrollController', ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout){
+    $scope.fanhui = function(){
+        $rootScope.hideTabs = false;
+        window.history.back();
+    }
+    $scope.data = [1,2,3,4,5];
+    var length;
+    $scope.doRefresh = function() {
+        length = $scope.data.length;
+        length++;
+        $scope.data.push(length);
+        $timeout( function() {
+            //Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+
+        }, 1000);
+
+    };
 }]);
 app.controller('DetailTabController', ['$scope', function($scope){
     var socket = io('http://192.168.1.113:3000');
