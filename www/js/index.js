@@ -57,8 +57,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', func
         })
     $urlRouterProvider.otherwise('/tab/home')
 }]);
-app.controller('HomeTabController', ['$scope', '$rootScope', '$state', function($scope, $rootScope, $state){
+app.factory('service', function(){
+    return {};
+});
+app.controller('HomeTabController', ['$scope', '$rootScope', '$state', '$ionicSideMenuDelegate', function($scope, $rootScope, $state, $ionicSideMenuDelegate){
     $scope.$on('$ionicView.enter', function(){
+        $ionicSideMenuDelegate.canDragContent(true);
         $rootScope.hideTabs = false;
     });
     $scope.push = function(){
@@ -142,9 +146,10 @@ app.controller('ScrollController', ['$scope', '$rootScope', '$timeout', function
 
     };
 }]);
-app.controller('DetailTabController', ['$scope', function($scope){
+app.controller('DetailTabController', ['$scope', '$ionicSideMenuDelegate', function($scope, $ionicSideMenuDelegate){
     var socket = io('http://10.10.10.127:3000');
     $scope.$on('$ionicView.enter', function(){
+        $ionicSideMenuDelegate.canDragContent(false);
         socket.on('connect', function(){
             console.log('Client has connected to the server!');
         });
@@ -164,7 +169,10 @@ app.controller('DetailTabController', ['$scope', function($scope){
     });
 }]);
 
-app.controller('SettingTabController', ['$scope', '$cordovaCapture', '$cordovaTouchID', function($scope, $cordovaCapture, $cordovaTouchID){
+app.controller('SettingTabController', ['$scope', '$cordovaCapture', '$cordovaTouchID', '$ionicSideMenuDelegate', function($scope, $cordovaCapture, $cordovaTouchID, $ionicSideMenuDelegate){
+    $scope.$on('$ionicView.enter', function(){
+        $ionicSideMenuDelegate.canDragContent(false);
+    });
     document.addEventListener("deviceready", function () {
         $cordovaTouchID.checkSupport().then(function(){
             $cordovaTouchID.authenticate("确认支付吗").then(function() {
