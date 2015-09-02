@@ -143,7 +143,7 @@ app.controller('ScrollController', ['$scope', '$rootScope', '$timeout', function
     };
 }]);
 app.controller('DetailTabController', ['$scope', function($scope){
-    var socket = io('http://192.168.1.113:3000');
+    var socket = io('http://192.168.1.111:3000');
     $scope.$on('$ionicView.enter', function(){
         socket.on('connect', function(){
             console.log('Client has connected to the server!');
