@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2CF98C7F-415E-4E81-9364-08C0C354848D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>ionic</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>070321FF08179CC4A810DE3383B600C0061920E1</key>
 		<string>https://github.com/wangbing0401/ionic-.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>platforms/ios/ionic.xcodeproj</string>
+	<string>platforms/ios/ionic.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>070321FF08179CC4A810DE3383B600C0061920E1</key>
