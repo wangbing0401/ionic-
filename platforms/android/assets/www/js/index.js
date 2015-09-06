@@ -83,7 +83,7 @@ app.controller('HomeTabController', ['$scope', '$rootScope', '$state', '$ionicSi
         $state.go('tabs.scroll');
     }
 }]);
-app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', '$ionicPlatform', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner, $ionicPlatform){
+app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner){
     var sheet_options = {
         buttonLabels: ['相机', '相册'],
         addCancelButtonWithLabel: '取消',
@@ -130,18 +130,6 @@ app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet',
 
             });
         }
-        var time = true;
-        $ionicPlatform.registerBackButtonAction(function(){
-            if(!time){
-                ionic.Platform.exitApp();
-            }else{
-                dialog_show("再次点击退出");
-                time = false;
-                setTimeout(function(){
-                    time = true;
-                }, 1500);
-            }
-        }, 100);
     }, false);
     $scope.fanhui = function(){
         $rootScope.hideTabs = false;
@@ -219,9 +207,21 @@ app.controller('SettingTabController', ['$scope', '$cordovaCapture', '$cordovaTo
     }
 }]);
 
-app.controller('sideMenuController', ['$scope', '$rootScope', function($scope, $rootScope){
+app.controller('sideMenuController', ['$scope', '$rootScope', '$ionicPlatform', function($scope, $rootScope, $ionicPlatform){
     $scope.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
+    var time = true;
+    $ionicPlatform.registerBackButtonAction(function(){
+        if(!time){
+            ionic.Platform.exitApp();
+        }else{
+            dialog_show("再次点击退出");
+            time = false;
+            setTimeout(function(){
+                time = true;
+            }, 1500);
+        }
+    }, 100);
 }]);
 
 //var time = true;
