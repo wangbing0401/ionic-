@@ -57,6 +57,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', func
         })
     $urlRouterProvider.otherwise('/tab/home')
 }]);
+function dialog_show(dia_content) {
+    var d = dialog({
+        content: dia_content
+    });
+    d.show();
+    setTimeout(function() {
+        d.close().remove();
+    }, 1500);
+}
 app.factory('service', function(){
     return {};
 });
@@ -74,7 +83,7 @@ app.controller('HomeTabController', ['$scope', '$rootScope', '$state', '$ionicSi
         $state.go('tabs.scroll');
     }
 }]);
-app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner){
+app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', '$ionicPlatform', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner, $ionicPlatform){
     var sheet_options = {
         buttonLabels: ['相机', '相册'],
         addCancelButtonWithLabel: '取消',
@@ -121,6 +130,18 @@ app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet',
 
             });
         }
+        var time = true;
+        $ionicPlatform.registerBackButtonAction(function(){
+            if(!time){
+                ionic.Platform.exitApp();
+            }else{
+                dialog_show("再次点击退出");
+                time = false;
+                setTimeout(function(){
+                    time = true;
+                }, 1500);
+            }
+        }, 100);
     }, false);
     $scope.fanhui = function(){
         $rootScope.hideTabs = false;
@@ -202,3 +223,15 @@ app.controller('sideMenuController', ['$scope', '$rootScope', function($scope, $
     $scope.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 }]);
+
+//var time = true;
+//plus.key.addEventListener("backButton", function(){
+//    if(!time){
+//        ionic.Platform.exitApp();
+//    }else{
+//        time = false;
+//        setTimeout(function(){
+//            time = true;
+//        }, 1500);
+//    }
+//});
