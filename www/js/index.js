@@ -169,33 +169,33 @@ app.controller('DetailTabController', ['$scope', '$ionicSideMenuDelegate', funct
     });
 }]);
 
-app.controller('SettingTabController', ['$scope', '$cordovaCapture', '$cordovaTouchID', '$ionicSideMenuDelegate', function($scope, $cordovaCapture, $cordovaTouchID, $ionicSideMenuDelegate){
+app.controller('SettingTabController', ['$scope', '$cordovaCapture', '$cordovaTouchID', '$ionicSideMenuDelegate', '$cordovaDevice', function($scope, $cordovaCapture, $cordovaTouchID, $ionicSideMenuDelegate, $cordovaDevice){
     $scope.$on('$ionicView.enter', function(){
         $ionicSideMenuDelegate.canDragContent(false);
     });
-    document.addEventListener("deviceready", function () {
-        $cordovaTouchID.checkSupport().then(function(){
-            $cordovaTouchID.authenticate("确认支付吗").then(function() {
-                alert("成功");
-            }, function () {
-                alert("失败");
+    if($cordovaDevice.getPlatform() == "iOS"){
+        document.addEventListener("deviceready", function () {
+            $cordovaTouchID.checkSupport().then(function(){
+                $cordovaTouchID.authenticate("确认支付吗").then(function() {
+                    alert("成功");
+                }, function () {
+                    alert("失败");
+                });
+            }, function(error){
+                alert("失败啦");
             });
-        }, function(error){
-            alert("失败啦");
+        }, false);
+    }
+    $scope.captureVideo = function() {
+        var options = { limit: 3, duration: 15 };
+
+        $cordovaCapture.captureVideo(options).then(function(videoData) {
+            $("#wb_video").attr('src', videoData);
+            $("#wb_video").attr('autoplay', 'true');
+        }, function(err) {
+            // An error occurred. Show a message to the user
         });
-
-        $scope.captureVideo = function() {
-            var options = { limit: 3, duration: 15 };
-
-            $cordovaCapture.captureVideo(options).then(function(videoData) {
-                $("#wb_video").attr('src', videoData);
-                $("#wb_video").attr('autoplay', 'true');
-            }, function(err) {
-                // An error occurred. Show a message to the user
-            });
-        }
-    }, false);
-
+    }
 }]);
 
 app.controller('sideMenuController', ['$scope', '$rootScope', function($scope, $rootScope){

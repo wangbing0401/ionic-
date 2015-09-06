@@ -99,6 +99,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.device/www/device.js",
+        "id": "org.apache.cordova.device.device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
         "id": "cordova-plugin-file.DirectoryEntry",
         "clobbers": [
@@ -253,6 +260,7 @@ module.exports.metadata =
     "com.phonegap.plugins.barcodescanner": "2.2.0",
     "cordova-plugin-media-capture": "1.0.0",
     "cordova-plugin-touchid": "0.3.0",
+    "org.apache.cordova.device": "0.3.0",
     "cordova-plugin-file": "2.0.0"
 }
 // BOTTOM OF METADATA

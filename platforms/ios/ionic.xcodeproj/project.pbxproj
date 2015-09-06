@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		13D440ACF03E4980ADBC537E /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2316DB6CA154670A55DF291 /* CDVLocalFilesystem.m */; };
 		153CD639EC1149A9A55E1040 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB44D23DDC4031BE7AA16C /* AudioToolbox.framework */; };
@@ -72,6 +71,7 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		E5CF66336A684FC7BA1EC141 /* zxing-all-in-one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2413010470484E02B1975516 /* zxing-all-in-one.cpp */; };
 		EF62904E8ECE4A30949ACCE4 /* CDVBarcodeScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20642A85343A4BFE8A7B9848 /* CDVBarcodeScanner.bundle */; };
+		438E1277EA1E41158A95B791 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7FA13BF6BA4027B65DCCCB /* CDVDevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +178,8 @@
 		F552284E83A04F1A8886D036 /* ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheet.m; path = "nl.x-services.plugins.actionsheet/ActionSheet.m"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ionic/config.xml; sourceTree = "<group>"; };
 		FEF0B0F63FF448F7A896C22A /* CDVFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVFile.h; path = "cordova-plugin-file/CDVFile.h"; sourceTree = "<group>"; };
+		BD7FA13BF6BA4027B65DCCCB /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "org.apache.cordova.device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		D2073C52372048A8AA5095C0 /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,8 @@
 				62C0F863F5E843B8812EC560 /* CDVCapture.h */,
 				785EEBE6E7B447E8AC6FF240 /* TouchID.m */,
 				CF6A804FE89E4F1FA7858D15 /* TouchID.h */,
+				BD7FA13BF6BA4027B65DCCCB /* CDVDevice.m */,
+				D2073C52372048A8AA5095C0 /* CDVDevice.h */,
 			);
 			name = Plugins;
 			path = ionic/Plugins;
@@ -535,6 +539,7 @@
 				803FCC4DC23E4CE28B7C3187 /* CDVAssetLibraryFilesystem.m in Sources */,
 				6A48E604360445BFBB0CC23C /* CDVCapture.m in Sources */,
 				CF221ECCDD4F426CA810BF46 /* TouchID.m in Sources */,
+				438E1277EA1E41158A95B791 /* CDVDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
