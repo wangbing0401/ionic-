@@ -57,17 +57,31 @@ app.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', func
         })
     $urlRouterProvider.otherwise('/tab/home')
 }]);
-function dialog_show(dia_content) {
-    var d = dialog({
-        content: dia_content
-    });
-    d.show();
-    setTimeout(function() {
-        d.close().remove();
-    }, 1500);
-}
 app.factory('service', function(){
-    return {};
+    return {
+        dialog_show:function(dia_content){
+            var d = dialog({
+                content: dia_content
+            });
+            d.show();
+            setTimeout(function() {
+                d.close().remove();
+            }, 1500);
+        },
+        encodeImageUri:function(imageUri){
+            var c=document.createElement('canvas');
+            var ctx=c.getContext("2d");
+            var img=new Image();
+            img.onload = function(){
+                c.width=this.width;
+                c.height=this.height;
+                ctx.drawImage(img, 0,0);
+            };
+            img.src=imageUri;
+            var dataURL = c.toDataURL("image/jpeg");
+            return dataURL;
+        }
+    };
 });
 app.controller('HomeTabController', ['$scope', '$rootScope', '$state', '$ionicSideMenuDelegate', function($scope, $rootScope, $state, $ionicSideMenuDelegate){
     $scope.$on('$ionicView.enter', function(){
@@ -83,7 +97,7 @@ app.controller('HomeTabController', ['$scope', '$rootScope', '$state', '$ionicSi
         $state.go('tabs.scroll');
     }
 }]);
-app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner){
+app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet', '$cordovaCamera', '$cordovaBarcodeScanner', 'service', function($scope, $rootScope, $cordovaActionSheet, $cordovaCamera, $cordovaBarcodeScanner, service){
     var sheet_options = {
         buttonLabels: ['相机', '相册'],
         addCancelButtonWithLabel: '取消',
@@ -105,7 +119,7 @@ app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet',
 
     var photo_options = {
         destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.CAMERA,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
     };
 
     document.addEventListener("deviceready", function () {
@@ -118,7 +132,8 @@ app.controller('PushController', ['$scope', '$rootScope', '$cordovaActionSheet',
                 }
                 if(btnIndex == 2){
                     $cordovaCamera.getPicture(photo_options).then(function(imageUrI){
-                        alert(imageUrI);
+                        var photo_library = service.encodeImageUri(imageUrI);
+                        alert(photo_library);
                     });
                 }
             });
@@ -207,7 +222,7 @@ app.controller('SettingTabController', ['$scope', '$cordovaCapture', '$cordovaTo
     }
 }]);
 
-app.controller('sideMenuController', ['$scope', '$rootScope', '$ionicPlatform', function($scope, $rootScope, $ionicPlatform){
+app.controller('sideMenuController', ['$scope', '$rootScope', '$ionicPlatform', 'service', function($scope, $rootScope, $ionicPlatform, service){
     $scope.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
     var time = true;
@@ -215,7 +230,7 @@ app.controller('sideMenuController', ['$scope', '$rootScope', '$ionicPlatform', 
         if(!time){
             ionic.Platform.exitApp();
         }else{
-            dialog_show("再次点击退出");
+            service.dialog_show("再次点击退出");
             time = false;
             setTimeout(function(){
                 time = true;
